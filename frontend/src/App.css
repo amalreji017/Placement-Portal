@@ -1,0 +1,14 @@
+.App{
+  position:absolute;
+  top:40%;
+  left: 40%;
+  padding: 10px;
+
+}
+.form{
+  margin: solid 3px white;
+}
+
+input{
+  padding-bottom: 5px;
+}
