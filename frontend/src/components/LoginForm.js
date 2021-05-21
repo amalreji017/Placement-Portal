@@ -23,8 +23,16 @@ const LoginForm = () => {
         email : form.email,
         password : form.password
       }
-      axios.post('http://localhost:4000/app/login/',login)
-      .then(response => console.log(response.data))
+      axios.post('http://localhost:4000/app/student/login/',login)
+      .then(response => {
+        console.log(response.data)
+        // if(response.data.result===true){
+        // window.location = '/profile'
+        // }else{
+        //   console.log(response.data.error)
+        // }
+
+      })
 
       //window.location = '/profile';
     }
