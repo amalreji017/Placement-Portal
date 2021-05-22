@@ -24,10 +24,6 @@ const usermodel = new mongoose.Schema({
         type:Date,
         default:Date.now
     },
-    student_name : {
-        type : String,
-        required:true
-    },
     college_id : {
         type : String,
         unique : true
@@ -57,6 +53,10 @@ const usermodel = new mongoose.Schema({
     },
     cgpa : {
         type : String,
+    },
+    backlog : {
+        type : Number,
+        default : 0
     },
     matric_marks : {
         type : String
