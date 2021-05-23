@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+var bcrypt = require('bcrypt-nodejs');
+mongoose.set('useCreateIndex', true);
+mongoose.set('useFindAndModify', false);
 
 const faculty = new mongoose.Schema({
     email:{
@@ -41,14 +44,9 @@ faculty.pre('save', function (next) {
     });
 });
 
-//userSchema.plugin(titlize, {
-    // addition here also
-//    paths: ['address','city','state','country' ], // Array of paths
-//});
-
 // Password compare method
 faculty.methods.comparePassword = function(password){
     return bcrypt.compareSync(password, this.password);
 };
 
-module.exports = mongoose.model('Faculty',faculty);
+module.exports = mongoose.model('faculty',faculty);

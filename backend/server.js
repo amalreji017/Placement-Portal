@@ -13,6 +13,7 @@ app.use(cors());
 
 //router
 app.use('/app/student',require('./router/user.router'));
+app.use('/app/faculty',require('./router/faculty.router'));
 
 
 app.listen(Port,()=>console.log('server connected')); 
