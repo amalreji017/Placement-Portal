@@ -1,5 +1,4 @@
 const nodemailer = require('nodemailer');
-//const templateService = require('../services/template.service');
 const dotenv = require('dotenv');
 dotenv.config();
 
