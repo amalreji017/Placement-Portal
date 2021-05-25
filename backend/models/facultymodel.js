@@ -3,7 +3,7 @@ var bcrypt = require('bcrypt-nodejs');
 mongoose.set('useCreateIndex', true);
 mongoose.set('useFindAndModify', false);
 
-const faculty = new mongoose.Schema({
+const facultymodel = new mongoose.Schema({
     email:{
         type:String,
         required:true
@@ -26,7 +26,7 @@ const faculty = new mongoose.Schema({
     }
 })
 
-faculty.pre('save', function (next) {
+facultymodel.pre('save', function (next) {
 
     var user = this;
 
@@ -45,8 +45,8 @@ faculty.pre('save', function (next) {
 });
 
 // Password compare method
-faculty.methods.comparePassword = function(password){
+facultymodel.methods.comparePassword = function(password){
     return bcrypt.compareSync(password, this.password);
 };
 
-module.exports = mongoose.model('faculty',faculty);
+module.exports = mongoose.model('faculty',facultymodel);
