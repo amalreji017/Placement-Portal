@@ -1,5 +1,7 @@
 const { request, response } = require('express');
 const usermodel = require('../models/usermodel');
+const mail  =require('../services/mail.service');
+const jwtService = require('../services/token.service');
 //const multer = require('multer');
 
 exports.login = async (request,response)=>{
@@ -29,6 +31,34 @@ exports.cgpa = async(request,response) => {
     });
 
 }
+
+//forgot password
+exports.forgotPassword = async (request, response) => {
+    const email = request.body.email;
+
+    if(!email)
+        response.status(200).json({ success : false, message : 'Missing Email ID'});
+    else{
+        try {
+            const user = await usermodel.findOne({ email : request.body.email }).select('college_id email temporarytoken student_name')
+
+            if(!user) {
+                response.status(200).json({ success : false, message : 'Email ID not found.'})
+            } else {
+                user.temporarytoken = jwtService.encode(user);
+                console.log(user.temporarytoken);
+                let updateToken = await usermodel.updateOne({ college_id : request.body.college_id }, { temporarytoken : user.temporarytoken })
+                const sendLink = await mail.sendMail(user);
+                response.status(200).json({ success : true, message : 'Link to reset your password has been sent to your registered email'});
+            }
+        }
+        catch (err) {
+            console.error(err);
+            response.status(200).json({ success : false, message : 'Something went wrong!' })
+        }
+    }
+}
+
 //insert
 // exports.insert = async (request,response) => {
 //     const email = request.body.email;

@@ -14,12 +14,12 @@ const  fileStorageEngine = multer.diskStorage({
 const upload = multer({ storage : fileStorageEngine });
 
 router.post('/login',userHandler.login);
-//router.post('/insert',userHandler.insert);
 router.post('/cgpa',userHandler.cgpa);
+router.post('/forgotpassword',userHandler.forgotPassword);
 
 router.post('/resume',upload.single(''),(req,res)=>{
     console.log(req.file);
     res.send('resume uploaded');
 });
-
+//router.post('/insert',userHandler.insert);
 module.exports = router;
