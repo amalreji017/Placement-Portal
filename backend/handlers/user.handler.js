@@ -46,8 +46,8 @@ exports.forgotPassword = async (request, response) => {
                 response.status(200).json({ success : false, message : 'Email ID not found.'})
             } else {
                 user.temporarytoken = jwtService.encode(user);
-                console.log(user.temporarytoken);
-                let updateToken = await usermodel.updateOne({ college_id : request.body.college_id }, { temporarytoken : user.temporarytoken })
+                //console.log(user.temporarytoken);
+                let updateToken = await usermodel.updateOne({ email : request.body.email }, { temporarytoken : user.temporarytoken })
                 const sendLink = await mail.sendMail(user);
                 response.status(200).json({ success : true, message : 'Link to reset your password has been sent to your registered email'});
             }
