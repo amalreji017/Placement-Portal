@@ -28,6 +28,7 @@ exports.getPrivateRoute = (req, res, next) => {
         success: true,
         data: "You got access to the Dashboard in this route",
       });
+    
   };
 
 
