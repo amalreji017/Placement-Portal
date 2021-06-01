@@ -1,5 +1,6 @@
 const { request, response } = require('express');
 const adminmodel = require('../../models/adminmodel');
+const usermodel = require('../../models/usermodel');
 
 
 
@@ -18,6 +19,30 @@ exports.login = async (req,res)=>{
     }
     
 }
+
+//insert student
+exports.insert = async (request,response) => {
+    const email = request.body.email;
+    const password= request.body.password;
+    const student_name = request.body.student_name;
+    const batch = request.body.batch;
+    const college_id = request.body.college_id;
+    const gender = request.body.gender;
+    const department= request.body.department;
+
+    const student = new usermodel({
+        email,
+        password,
+        student_name,
+        batch,
+        college_id,
+        gender,
+        department
+    });
+    student.save()
+    .then(()=>response.json(' student added!!'))
+    .catch(err=>response.status(400).json('error: '+err));
+} 
 
 
 //admin dashboard 
